@@ -31,8 +31,10 @@ public:
     //Postcondition: realPart = real; imaginaryPart = imag
 
     complexType operator+(const complexType& otherComplex) const;
+    complexType operator-(const complexType& otherComplex) const;
     //overload +
     complexType operator*(const complexType& otherComplex) const;
+    complexType operator/(const complexType& otherComplex) const;
     //overload *
     //overload -
     //overload /

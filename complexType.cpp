@@ -54,6 +54,23 @@ void complexType::getComplex(double& real, double& imag) const
     imag = imaginaryPart;
 }
 
+// If (a, b) and (c, d) are complex numbers: (a, b) - (c, d) = (a - c, b - d)
+complexType complexType::operator-(const complexType& otherComplex) const {
+    complexType temp(-1 * otherComplex.realPart, -1* otherComplex.imaginaryPart);
+
+    return this->operator+(temp);
+}
+
+//If (c, d) is nonzero: (a, b)/(c, d) = ((ac + bd)/(c^2+d^2), (-ad + bc)/(c^2+d^2))
+complexType complexType::operator/(const complexType& otherComplex) const{
+    double real = this->realPart * otherComplex.realPart + this->imaginaryPart * otherComplex.imaginaryPart;
+    double imag = -1 * this->realPart * otherComplex.imaginaryPart + this->imaginaryPart * otherComplex.realPart;
+
+    double dominator = otherComplex.realPart * otherComplex.realPart + otherComplex.imaginaryPart * otherComplex.imaginaryPart;
+
+    return {real/dominator, imag/dominator};
+}
+
 //overload the operator +
 complexType complexType::operator+(const complexType& otherComplex) const
 {
@@ -81,4 +98,3 @@ complexType complexType::operator*(const complexType& otherComplex) const
 
 // overload the oeprator /
 
-}
